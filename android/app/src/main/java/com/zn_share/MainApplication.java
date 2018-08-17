@@ -55,6 +55,6 @@ public class MainApplication extends Application implements ReactApplication {
   public void onCreate() {
     super.onCreate();
     SoLoader.init(this, /* native exopackage */ false);
-    CrashReport.initCrashReport(getApplicationContext(), "f7e825bdb6", false);
+    CrashReport.initCrashReport(getApplicationContext(), "eb90a3f679", false);
   }
 }
