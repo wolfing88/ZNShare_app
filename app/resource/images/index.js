@@ -4,6 +4,7 @@
 
 const Images =  {
 	default: require('./default.jpeg'),
+	Main: require('./Main.png'),
 	errorImage: require('./errorImage.png')
 };
 

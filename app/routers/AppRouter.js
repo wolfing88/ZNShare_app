@@ -15,6 +15,7 @@ import {
 import { System } from '../utils/index';
 import { CustomIcon, Theme } from '../components/index';
 
+import { Home } from '../pages/Home/index';
 import { ZNShare } from '../pages/ZNShare/index';
 import { News, Welfare, BuDeJie, BuDeJieDetail } from '../pages/News/index';
 import { Main } from '../pages/Main/index';
@@ -52,8 +53,8 @@ const MyTab = createBottomTabNavigator({
 });
 
 export const AppRouter = createStackNavigator({
-	MyTab: {
-		screen: MyTab,
+  Home: {
+		screen: Home,
 	},
 	BuDeJie: {
 		screen: BuDeJie,
