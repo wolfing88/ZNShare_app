@@ -6,15 +6,21 @@ import {
   View,
   Text,
   Image,
-  TouchableOpacity
+  TouchableOpacity,
+  StyleSheet
 } from 'react-native'
 
-import { Images } from '../../resource';
+import BaseContainer from '../../components/BaseContainer'
+import { Images } from '../../resource'
 import React, { Component } from 'react'
 import CarouselView from '../../components/CarouselView'
 import MarqueeLabel from 'react-native-lahk-marquee-label'
 
-export class Home extends React.Component<any, State> {
+type Props = {
+  navigation: any
+};
+
+export class Home extends React.Component<Props, any> {
   constructor (props) {
     super(props)
     this.state = {
@@ -32,15 +38,15 @@ export class Home extends React.Component<any, State> {
 
   render () {
     return (
-      <View style={{ flex: 1 }}>
+      <BaseContainer style={styles.container} isHiddenNavBar={false} isTopNavigator={true} title={'我的'}>
         <CarouselView imageList={this.state.imageList}/>
         <MarqueeLabel
           duration={8000}
           text={'This is a Marquee Label.'}
           textStyle={{ fontSize: FONT_SIZE(13), color: '#6f6' }}
         />
-        <Botton/>
-      </View>
+        <Botton navigation={this.props.navigation}/>
+      </BaseContainer>
     )
   }
 }
@@ -51,9 +57,9 @@ class Botton extends Component {
     super(props)
     this.state = {
       bottonList: [
-        { 'title': 'test', 'router': 'lm', 'img': Images.Main },
-        { 'title': 'test', 'router': 'lm', 'img': Images.Main },
-        { 'title': 'test', 'router': 'lm', 'img': Images.Main },
+        { 'title': 'test', 'router': 'News', 'img': Images.Main },
+        { 'title': 'test', 'router': 'BuDeJie', 'img': Images.Main },
+        { 'title': 'test', 'router': 'BuDeJie', 'img': Images.Main },
         { 'title': 'test', 'router': 'lm', 'img': Images.Main },
         { 'title': 'test', 'router': 'lm', 'img': Images.Main },
         { 'title': 'test', 'router': 'lm', 'img': Images.Main },
@@ -65,30 +71,19 @@ class Botton extends Component {
 
   //跳转
   toJump = (data) => {
-    Actions.Fxqg()
+    this.props.navigation.navigate(data.router)
   }
 
   render () {
     let bottons = this.state.bottonList && this.state.bottonList.map((data, index) => {
       return (
-        <TouchableOpacity key={index} style={{ width: SCREEN_WIDTH / 4, height: SCREEN_HEIGHT / 5.5 }}
+        <TouchableOpacity key={index} style={styles.btnTouchableOpacity}
                           onPress={() => {this.toJump(data)}}>
-          <View style={{ backgroundColor: '#FFF', margin: px2dp(2), borderRadius: px2dp(5) }}>
-            <View style={{
-              width: SCREEN_WIDTH / 4,
-              height: SCREEN_WIDTH / 4,
-              justifyContent: 'center',
-              alignItems: 'center'
-            }}>
+          <View style={styles.btnBox}>
+            <View style={styles.btnImgBox}>
               <Image style={{ flex: 1 }} resizeMode={'contain'} source={data.img}/>
             </View>
-            <View style={{
-              width: SCREEN_WIDTH / 4,
-              height: SCREEN_HEIGHT / 5.5 - SCREEN_WIDTH / 4,
-              justifyContent: 'center',
-              alignItems: 'center',
-              paddingBottom: px2dp(30)
-            }}>
+            <View style={styles.btnTextBox}>
               <Text style={{ fontSize: px2dp(30) }}>{data.title}</Text>
             </View>
           </View>
@@ -96,8 +91,7 @@ class Botton extends Component {
       )
     })
     return (
-      <View
-        style={{ position: 'absolute', bottom: 0, flexDirection: 'row', flexWrap: 'wrap', backgroundColor: '#eeeeef' }}>
+      <View style={styles.btnsBox}>
         {
           bottons
         }
@@ -105,3 +99,38 @@ class Botton extends Component {
     )
   }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1
+  },
+  btnTouchableOpacity: {
+    width: SCREEN_WIDTH / 4,
+    height: SCREEN_HEIGHT / 5.5
+  },
+  btnsBox: {
+    position: 'absolute',
+    bottom: 0,
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    backgroundColor: '#eeeeef'
+  },
+  btnBox: {
+    backgroundColor: '#FFF',
+    margin: px2dp(2),
+    borderRadius: px2dp(5)
+  },
+  btnImgBox: {
+    width: SCREEN_WIDTH / 4,
+    height: SCREEN_WIDTH / 4,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  btnTextBox: {
+    width: SCREEN_WIDTH / 4,
+    height: SCREEN_HEIGHT / 5.5 - SCREEN_WIDTH / 4,
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingBottom: px2dp(30)
+  }
+})
