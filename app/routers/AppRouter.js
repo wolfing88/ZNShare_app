@@ -56,6 +56,9 @@ export const AppRouter = createStackNavigator({
   Home: {
 		screen: Home,
 	},
+  MyTab: {
+		screen: MyTab,
+	},
 	BuDeJie: {
 		screen: BuDeJie,
 	},

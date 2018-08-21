@@ -40,11 +40,12 @@ export class Home extends React.Component<Props, any> {
     return (
       <BaseContainer style={styles.container} isHiddenNavBar={false} isTopNavigator={true} title={'我的'}>
         <CarouselView imageList={this.state.imageList}/>
-        <MarqueeLabel
-          duration={8000}
-          text={'This is a Marquee Label.'}
-          textStyle={{ fontSize: FONT_SIZE(13), color: '#6f6' }}
-        />
+          <MarqueeLabel
+            //有bug时在源码 Animated.timing 加上 isInteraction: false,
+            duration={8000}
+            text={'This is a Marquee Label.'}
+            textStyle={{ fontSize: FONT_SIZE(13), color: '#6f6' }}
+          />
         <Botton navigation={this.props.navigation}/>
       </BaseContainer>
     )
